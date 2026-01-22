@@ -1,0 +1,11 @@
+* text=auto
+
+# PowerShell scripts should be CRLF
+*.ps1 text eol=crlf
+
+# These are safer as LF (works fine on Windows too)
+*.go text eol=lf
+*.sql text eol=lf
+*.yml text eol=lf
+*.yaml text eol=lf
+*.md text eol=lf

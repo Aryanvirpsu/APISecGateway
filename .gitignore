@@ -1,0 +1,41 @@
+# ---- OS / Editor ----
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# VS Code
+.vscode/
+*.code-workspace
+
+# JetBrains
+.idea/
+
+# ---- Go ----
+# binaries
+*.exe
+*.dll
+*.so
+*.dylib
+*.test
+*.out
+
+# build output (if you ever use it)
+bin/
+dist/
+
+# Go workspace local files (optional)
+# go.work.sum is OK to commit; keep it
+# (do not ignore go.work / go.work.sum)
+
+# ---- Logs ----
+*.log
+
+# ---- Env / secrets ----
+.env
+*.env
+.env.*
+
+# ---- Docker ----
+# Local data volumes (if you ever bind-mount)
+pgdata/
+redisdata/

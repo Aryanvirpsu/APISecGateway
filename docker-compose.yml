@@ -1,0 +1,23 @@
+
+
+services:
+  postgres:
+    image: postgres:15
+    container_name: api-sec-postgres
+    environment:
+      POSTGRES_USER: secuser
+      POSTGRES_PASSWORD: secpass
+      POSTGRES_DB: apisec
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  redis:
+    image: redis:7
+    container_name: api-sec-redis
+    ports:
+      - "6379:6379"
+
+volumes:
+  pgdata:
