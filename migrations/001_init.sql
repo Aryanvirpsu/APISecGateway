@@ -1,4 +1,4 @@
-create table request_logs (
+create table if not exists request_logs (
   id uuid primary key,
   ts timestamptz not null default now(),
   request_id uuid not null,
@@ -12,7 +12,7 @@ create table request_logs (
   token_id text
 );
 
-create table alerts (
+create table if not exists alerts (
   id uuid primary key,
   ts timestamptz not null default now(),
   request_id uuid,
@@ -24,14 +24,20 @@ create table alerts (
   metadata jsonb
 );
 
-create table blocked_ips (
+create table if not exists blocked_ips (
   ip text primary key,
   blocked_at timestamptz default now(),
   reason text
 );
 
-create table revoked_tokens (
+create table if not exists revoked_tokens (
   token_id text primary key,
   revoked_at timestamptz default now(),
   reason text
 );
+
+-- Helpful indexes for the dashboards/queries you'll likely run.
+create index if not exists request_logs_ts_idx on request_logs (ts desc);
+create index if not exists request_logs_source_ip_idx on request_logs (source_ip);
+create index if not exists alerts_ts_idx on alerts (ts desc);
+create index if not exists alerts_type_idx on alerts (alert_type);
