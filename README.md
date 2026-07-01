@@ -1,8 +1,23 @@
 # End-to-End API Security Gateway
 
-A small reverse-proxy gateway that sits in front of a backend API and enforces a
+A secure reverse-proxy gateway that sits in front of a backend API and enforces a
 chain of security controls — request logging, authentication, rate limiting,
 IDOR protection and automatic IP blocking — backed by Postgres.
+
+## Focus
+
+- **Bearer-token authentication** — every `/api/*` request needs a valid
+  `Authorization: Bearer <token>`; unknown or revoked tokens are rejected
+- **API access control** — tokens are scoped per user; IDOR (cross-user access)
+  attempts are blocked and alerted
+- **Rate limiting** — per-IP token bucket, with automatic IP blocking on
+  sustained abuse
+- **Request validation & logging** — every request is logged with identity,
+  status and latency; security events are recorded as alerts
+- **Security middleware chain** — composable controls in front of the upstream
+
+> Scope note: authentication uses static bearer tokens (issued via config), not
+> JWT or OAuth 2.0. Those are possible extensions, not part of the current build.
 
 ## Components
 
