@@ -69,7 +69,22 @@ cd demo-api; go mod tidy; cd ..
 The equivalent targets are available via `make up`, `make tidy`,
 `make run-api` and `make run-gateway`.
 
-## Try it
+## Demo (one shot)
+
+With the stack up (`docker compose up -d` + both services running), run the
+demo script. It drives the full attack sequence through the gateway and then
+prints what the gateway recorded in Postgres:
+
+```powershell
+.\scripts\demo.ps1            # clean run (resets request_logs/alerts first)
+.\scripts\demo.ps1 -KeepData  # keep existing rows
+```
+
+It walks through: a healthy request, a missing token (`401`), an unknown token
+(`401`), two IDOR attempts (`403`), and a burst that trips the rate limiter
+(`429`) — then shows the resulting `request_logs`, `alerts` and `blocked_ips`.
+
+To try the pieces by hand:
 
 ```bash
 # Healthy request to your own resource

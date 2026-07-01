@@ -1,4 +1,4 @@
-.PHONY: up down tidy build run-api run-gateway test
+.PHONY: up down tidy build run-api run-gateway test demo
 
 up:
 	docker compose up -d
@@ -24,3 +24,6 @@ test:
 	bash tests/smoke.sh
 	bash tests/idor.sh
 	bash tests/rate_abuse.sh
+
+demo:
+	powershell -ExecutionPolicy Bypass -File scripts/demo.ps1
